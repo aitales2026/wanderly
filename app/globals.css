@@ -1,26 +1,151 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans:
+    var(--font-geist), var(--font-noto-sans-sc), ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono: var(--font-geist-mono);
+  --font-heading:
+    var(--font-geist), var(--font-noto-sans-sc), ui-sans-serif, system-ui,
+    sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-ai: var(--ai);
+  --color-success: var(--success);
+  --color-text-muted: var(--text-muted);
+
+  /* Radius scale — DESIGN.md §6 */
+  --radius-sm: 0.75rem; /* 12px small controls */
+  --radius-md: 0.875rem; /* 14px buttons / inputs */
+  --radius-lg: 1rem; /* 16px activity card images */
+  --radius-xl: 1.25rem; /* 20px cards */
+  --radius-2xl: 1.5rem; /* 24px planner card / AI panel */
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 1.5rem;
+
+  /* Typography — DESIGN.md §4 */
+  --text-hero: 4rem;
+  --text-hero--line-height: 1.05;
+  --text-hero--letter-spacing: -0.02em;
+  --text-title: 2.5rem;
+  --text-title--line-height: 1.1;
+  --text-section: 1.75rem;
+  --text-section--line-height: 1.2;
+  --text-card: 1.25rem;
+  --text-card--line-height: 1.3;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  /* Shadows — DESIGN.md §7 (sparing) */
+  --shadow-planner: 0 24px 48px -16px rgb(23 59 53 / 0.16);
+  --shadow-float: 0 12px 32px -12px rgb(23 59 53 / 0.14);
+
+  /* Layout */
+  --container-content: 1200px;
+
+  /* Motion — DESIGN.md §19 */
+  --animate-breathe: breathe 2.4s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.4s ease-out both;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Wanderly palette — DESIGN.md §3 */
+  --background: #f7f5f0;
+  --foreground: #1c2421;
+  --card: #ffffff;
+  --card-foreground: #1c2421;
+  --popover: #ffffff;
+  --popover-foreground: #1c2421;
+  --primary: #173b35;
+  --primary-foreground: #f7f5f0;
+  --primary-hover: #0f2d28;
+  --secondary: #f1ebdd;
+  --secondary-foreground: #173b35;
+  --muted: #f1ebdd;
+  --muted-foreground: #6b756f;
+  --accent: #e9825b;
+  --accent-foreground: #ffffff;
+  --destructive: #b85c5c;
+  --success: #557a61;
+  --ai: #f1ebdd;
+  --border: #e7e3db;
+  --input: #e7e3db;
+  --ring: #173b35;
+  --text-muted: #9ca39f;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: clip;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
