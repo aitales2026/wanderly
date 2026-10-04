@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 import { loadCurrentTrip } from "@/lib/storage";
 import type { StoredTrip } from "@/types/trip";
 import { TripHero } from "./TripHero";
@@ -50,6 +53,12 @@ export function TripClient() {
         ))}
       </div>
       <TravelTips tips={trip.tips} />
+      <section className="mx-auto max-w-4xl px-4 pb-16 pt-4 text-center">
+        <p className="mb-4 text-muted-foreground">行程到这里就结束啦，下一站想去哪？</p>
+        <Link href="/" className={buttonVariants({ size: "lg" })}>
+          再规划一场旅行 <ArrowRight className="size-4" />
+        </Link>
+      </section>
     </div>
   );
 }

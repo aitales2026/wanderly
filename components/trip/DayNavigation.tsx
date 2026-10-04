@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { House } from "lucide-react";
 import type { TripDay } from "@/types/trip";
 
 interface DayNavigationProps {
@@ -41,20 +43,29 @@ export function DayNavigation({ days }: DayNavigationProps) {
   return (
     <div className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto max-w-4xl px-4 py-3">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-          {days.map((day) => (
-            <button
-              key={day.day}
-              onClick={() => scrollToDay(day.day)}
-              className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                activeDay === day.day
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-foreground hover:bg-muted/80"
-              }`}
-            >
-              第 {day.day} 天
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <div className="flex flex-1 gap-2 overflow-x-auto scrollbar-hide">
+            {days.map((day) => (
+              <button
+                key={day.day}
+                onClick={() => scrollToDay(day.day)}
+                className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  activeDay === day.day
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-foreground hover:bg-muted/80"
+                }`}
+              >
+                第 {day.day} 天
+              </button>
+            ))}
+          </div>
+          <Link
+            href="/"
+            aria-label="返回首页"
+            className="flex-shrink-0 whitespace-nowrap rounded-full bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/80"
+          >
+            <House className="size-4" aria-hidden /> 首页
+          </Link>
         </div>
       </div>
     </div>
